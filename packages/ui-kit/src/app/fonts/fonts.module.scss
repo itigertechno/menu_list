@@ -1,0 +1,41 @@
+.main_class {
+	padding: 160px 140px;
+	display: grid;
+	column-gap: 350px;
+	row-gap: 140px;
+	grid-template-columns: repeat(1, 1fr);
+	@media (min-width: 1920px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	font-size: 48px;
+	color: #f5f5f5;
+}
+
+.demo_wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 42px;
+
+	.name_wrapper {
+		display: flex;
+		gap: 32px;
+		align-items: baseline;
+
+		.font_name {
+			font-size: 96px;
+			font-weight: 600;
+			letter-spacing: 6;
+		}
+
+		.notice {
+			color: #989898;
+		}
+	}
+
+	.demo {
+		display: flex;
+		flex-direction: column;
+		gap: 38px;
+	}
+}
