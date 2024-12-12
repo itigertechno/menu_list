@@ -1,20 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import * as Components from './index';
 import s from './typo-demo.module.scss';
 
-const getLineHeightPercentage = (div: React.RefObject<null>['current']) => {
+const getLineHeightPercentage = (div: React.RefObject<HTMLDivElement | null>['current']) => {
 	if (!div) return 'normal';
 	for (const sheet of document.styleSheets)
 		for (const rule of sheet.cssRules ?? [])
-			if (div.parentElement?.classList[0] && rule.selectorText?.slice(1) === div.parentElement.classList[0])
+			if (rule.selectorText && rule.selectorText.slice(1) === div.parentElement?.classList[0])
 				return /\d+%/.exec(rule.style.font)[0];
 	return 'normal';
 };
 
 export default function () {
-	const [_, forceRerender] = useState(false);
+	const forceUpdate = useReducer(x => (x + 1) & 0xf, 0)[1];
 	const [components, setComponents] = useState(
 		Object.entries(Components).map(([name, Component]) =>
 			//
@@ -22,16 +22,10 @@ export default function () {
 		)
 	);
 	useEffect(() => {
-		setComponents(components =>
-			components.toSorted(
-				(a, b) =>
-					parseInt(getComputedStyle(b.ref.current!).fontSize) -
-					parseInt(getComputedStyle(a.ref.current!).fontSize)
-			)
-		);
-		const handleResize = () => forceRerender(p => !p); // trigger to update getComputedStyle
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		const size = (o: { ref: React.RefObject<null> }) => parseInt(getComputedStyle(o.ref.current!).fontSize);
+		setComponents(components => components.toSorted((a, b) => size(b) - size(a)));
+		window.addEventListener('resize', forceUpdate); // trigger to update getComputedStyle
+		return () => window.removeEventListener('resize', forceUpdate);
 	}, []);
 	return (
 		<div className={s.demo}>
