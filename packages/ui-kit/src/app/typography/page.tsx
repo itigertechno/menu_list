@@ -49,7 +49,7 @@ export default function () {
 							font-family:{' '}
 							{ref.current
 								? getComputedStyle(ref.current).fontFamily.replace(
-										/\W+(\w+).+/,
+										/\W*(\w+).+/,
 										(_, m) => m[0].toUpperCase() + m.slice(1)
 								  )
 								: 0}
