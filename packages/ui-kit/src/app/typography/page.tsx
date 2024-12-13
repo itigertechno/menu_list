@@ -22,8 +22,11 @@ export default function () {
 		)
 	);
 	useEffect(() => {
-		const size = (o: { ref: React.RefObject<null> }) => parseInt(getComputedStyle(o.ref.current!).fontSize);
-		setComponents(components => components.toSorted((a, b) => size(b) - size(a)));
+		const size = (o: { ref: React.RefObject<null> }) =>
+			o.ref.current ? parseInt(getComputedStyle(o.ref.current).fontSize) : 0;
+		const weight = (o: { ref: React.RefObject<null> }) =>
+			o.ref.current ? parseInt(getComputedStyle(o.ref.current).fontWeight) : 0;
+		setComponents(components => components.toSorted((a, b) => size(b) - size(a) || weight(b) - weight(a)));
 		window.addEventListener('resize', forceUpdate); // trigger to update getComputedStyle
 		return () => window.removeEventListener('resize', forceUpdate);
 	}, []);
