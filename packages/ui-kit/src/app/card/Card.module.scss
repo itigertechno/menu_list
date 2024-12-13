@@ -1,0 +1,111 @@
+.card {
+	font-family: 'Nunito Sans', sans-serif;
+
+	width: 306px;
+	height: 373px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 8px;
+	box-shadow: 20px 30px 80px 0px #e6e6e6;
+
+	> img {
+		border-radius: 8px 8px 0px 0px;
+	}
+
+	.card_image_wrapper {
+		max-height: 180px;
+		position: relative;
+
+		> img {
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.bookmark_icon_wrapper {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 40px;
+			width: 40px;
+			margin: 12px 12px 0 0;
+			border-radius: 100vw;
+			background: #00000066;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			* {
+				height: 24px;
+				width: 24px;
+				filter: invert(100%) brightness(1000%) contrast(100%);
+			}
+		}
+
+		.card_time {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			padding: 4.5px 12px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			border-top-left-radius: 12px;
+			background: #fff;
+
+			.timer_icon {
+				filter: invert(12%) sepia(66%) saturate(2380%) hue-rotate(347deg) brightness(96%) contrast(96%);
+
+				&,
+				* {
+					height: 24px;
+					width: 24px;
+				}
+			}
+		}
+	}
+
+	.card_main {
+		position: relative;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 16px 16px 20px 16px;
+		gap: 24px;
+
+		.card_info_wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+
+			.card_details {
+				display: flex;
+				justify-content: space-between;
+
+				.dollar_sign {
+					font-weight: 500;
+				}
+				.card_mass {
+					display: flex;
+					align-self: center;
+					* {
+						color: color.$text-subtitle;
+					}
+				}
+			}
+		}
+
+		.card_button {
+			border-radius: 100vw;
+			width: 100%;
+			padding: 12px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+
+			background: #fafafa;
+			border: 2px solid #efefef;
+		}
+	}
+}

@@ -1,6 +1,8 @@
 import s from './typography.module.scss';
 
-type Typography = (props: Readonly<{ children: React.JSX.Element }>) => React.JSX.Element;
+type TypoChild = string | React.JSX.Element;
+
+type Typography = (props: Readonly<{ children: TypoChild | TypoChild[] }>) => React.JSX.Element;
 
 export const Heading1: Typography = p => <span className={s.heading1}>{p.children}</span>;
 export const Heading2: Typography = p => <span className={s.heading2}>{p.children}</span>;
