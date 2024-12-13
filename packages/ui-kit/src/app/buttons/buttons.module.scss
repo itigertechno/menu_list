@@ -1,0 +1,36 @@
+@use 'sass:math';
+
+$radius: 1.5px;
+
+.button {
+	outline: none;
+	background: color.$button-bg-contrast;
+	border: $radius solid color.$button-bg-contrast;
+	border-radius: 100vw;
+	width: fit-content;
+	padding: 16px + ($radius) 48px;
+	@supports (-moz-appearance: none) {
+		padding: 16px + math.div($radius * 2, 3) 48px;
+	}
+
+	* {
+		line-height: 1;
+		color: color.$button-bg;
+	}
+
+	&:hover,
+	&:active {
+		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+		background: color.$button-bg;
+		* {
+			color: color.$button-bg-contrast;
+		}
+	}
+
+	&:disabled {
+		background: color.$button-bg-disabled;
+		* {
+			color: color.$text-filters;
+		}
+	}
+}
