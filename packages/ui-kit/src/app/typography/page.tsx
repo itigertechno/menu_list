@@ -48,6 +48,7 @@ export default function () {
 						</div>
 					</Component>
 					<div className={s.property_values}>
+						<div>color: {ref.current ? getComputedStyle(ref.current).color : ''}</div>
 						<div>
 							font-family:{' '}
 							{ref.current

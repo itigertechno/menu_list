@@ -1,6 +1,6 @@
 .heading1 {
 	font: 600 32px/143% var(--font-gilroy);
-	color: #1a1a1a; // #e5e5e5
+	color: color.$text-heading; // #e5e5e5
 	@media (min-width: 1080px) {
 		font: 600 64px/130% var(--font-gilroy);
 	}
@@ -8,7 +8,7 @@
 
 .heading2 {
 	font: 500 28px/126% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-heading;
 	@media (min-width: 1080px) {
 		font: 500 56px/130% var(--font-gilroy);
 	}
@@ -16,7 +16,7 @@
 
 .heading3 {
 	font: 500 24px/134% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-heading;
 	@media (min-width: 1080px) {
 		font: 500 48px/120% var(--font-gilroy);
 	}
@@ -24,7 +24,7 @@
 
 .heading4 {
 	font: 500 20px/130% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-heading;
 	@media (min-width: 1080px) {
 		font: 500 32px/110% var(--font-gilroy);
 	}
@@ -32,7 +32,7 @@
 
 .heading5 {
 	font: 500 18px/130% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-heading;
 	@media (min-width: 1080px) {
 		font: 500 24px/130% var(--font-gilroy);
 	}
@@ -40,7 +40,7 @@
 
 .textMain {
 	font: 400 16px/140% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-main;
 	@media (min-width: 1080px) {
 		font: 400 18px/140% var(--font-nunito-sans);
 	}
@@ -48,7 +48,7 @@
 
 .regularNavigation {
 	font: 400 14px/143% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 400 18px/143% var(--font-nunito-sans);
 	}
@@ -56,7 +56,7 @@
 
 .activeNavigation {
 	font: 500 14px/143% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 500 18px/143% var(--font-nunito-sans);
 	}
@@ -64,7 +64,7 @@
 
 .textButton {
 	font: 600 16px/150% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 600 18px/150% var(--font-nunito-sans);
 	}
@@ -72,7 +72,7 @@
 
 .textOfElements {
 	font: 600 16px/150% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 400 20px/150% var(--font-nunito-sans);
 	}
@@ -80,7 +80,7 @@
 
 .cardContent {
 	font: 400 14px/140% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 400 16px/160% var(--font-nunito-sans);
 	}
@@ -89,7 +89,7 @@
 .subtitle {
 	text-transform: uppercase;
 	font: 500 16px/140% var(--font-nunito-sans);
-	color: #1a1a1a;
+	color: color.$text-subtitle;
 	@media (min-width: 1080px) {
 		font: 400 18px/140% var(--font-nunito-sans);
 	}
@@ -97,7 +97,7 @@
 
 .cardTitle {
 	font: 500 18px/140% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 500 20px/120% var(--font-gilroy);
 	}
@@ -105,7 +105,7 @@
 
 .small {
 	font: 400 14px/148% var(--font-gilroy);
-	color: #1a1a1a;
+	color: color.$text-component;
 	@media (min-width: 1080px) {
 		font: 400 14px/148% var(--font-gilroy);
 	}
