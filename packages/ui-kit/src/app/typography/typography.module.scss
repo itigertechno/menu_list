@@ -18,7 +18,7 @@
 	font: 500 24px/134% var(--font-gilroy);
 	color: color.$text-heading;
 	@media (min-width: 1080px) {
-		font: 500 48px/120% var(--font-gilroy);
+		font: 500 48px/140% var(--font-gilroy);
 	}
 }
 
@@ -31,18 +31,18 @@
 }
 
 .heading5 {
-	font: 500 18px/130% var(--font-gilroy);
+	font: 500 18px/150% var(--font-gilroy);
 	color: color.$text-heading;
 	@media (min-width: 1080px) {
-		font: 500 24px/130% var(--font-gilroy);
+		font: 500 24px/150% var(--font-gilroy);
 	}
 }
 
 .textMain {
-	font: 400 16px/140% var(--font-nunito-sans);
+	font: 400 16px/160% var(--font-nunito-sans);
 	color: color.$text-main;
 	@media (min-width: 1080px) {
-		font: 400 18px/140% var(--font-nunito-sans);
+		font: 400 18px/170% var(--font-nunito-sans);
 	}
 }
 

@@ -1,3 +1,5 @@
+// main wrapper
+
 .card {
 	box-shadow: 20px 30px 80px 0px rgb(110, 110, 110, 0.1);
 	background: #fff;
@@ -9,125 +11,115 @@
 	&.card_wide {
 		width: 636px;
 		height: 450px;
-
-		.card_image_wrapper,
-		.preview_image {
-			min-height: 298px !important;
-		}
-	}
-
-	.card_image_wrapper {
-		min-height: 180px;
-		position: relative;
-
-		.preview_image {
-			width: 100%;
-			height: 100%;
-			min-height: 180px;
-			object-fit: cover;
-		}
-
-		.image_skeleton_loader {
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			content: '';
-
-			&:not(.loader_scrim) {
-				background: #acacac;
-
-				&.animate {
-					animation: solid-breathe 3s ease-out infinite;
-				}
-
-				@keyframes solid-breathe {
-					0% {
-						filter: brightness(1);
-					}
-					25% {
-						filter: brightness(1.3);
-					}
-					50% {
-						filter: brightness(1.1);
-					}
-					75% {
-						filter: brightness(1.2);
-					}
-					100% {
-						filter: brightness(1);
-					}
-				}
-			}
-
-			&.loader_scrim {
-				background: linear-gradient(to top, #3a3e42, #d9d9d9 98%);
-
-				&.animate {
-					background-size: 200% 200%;
-					animation: gradient-breathe 2s ease-in-out infinite;
-				}
-
-				@keyframes gradient-breathe {
-					0% {
-						background-position: 50% 50%;
-					}
-					25% {
-						background-position: 100% 100%;
-					}
-					50% {
-						background-position: 60% 60%;
-					}
-					75% {
-						background-position: 65% 65%;
-					}
-					100% {
-						background-position: 50% 50%;
-					}
-				}
-			}
-		}
-
-		// A scrim gradient is a semi-transparent color layer that fades in or out over an image, often used to enhance readability or create a specific visual style
-		// https://swiftuisnippets.wordpress.com/2024/07/18/adding-a-scrim-gradient-overlay-to-images-with-swift/
-		// https://medium.com/@designwithkabi/ux-drill-03-what-is-a-scrim-0b37dc1e025e
-		// https://www.slrlounge.com/glossary/scrim-definition/
-		.scrim {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			background: linear-gradient(to top, rgba(0, 0, 0, 0.6), #0000 74%);
-		}
-
-		.top_left {
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
-		.top_right {
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		.bottom_left {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-		}
-		.bottom_right {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-		}
 	}
 }
 
+// top part of a card (preview image)
+
+.card_wide {
+	.card_image_wrapper,
+	.preview_image {
+		min-height: 298px !important;
+	}
+}
+.card_image_wrapper {
+	min-height: 180px;
+	position: relative;
+
+	.preview_image {
+		width: 100%;
+		height: 100%;
+		min-height: 180px;
+		object-fit: cover;
+	}
+
+	.image_skeleton_loader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		content: '';
+
+		&:not(.loader_scrim) {
+			background: #acacac;
+
+			&.animate {
+				animation: solid-breathe 3s ease-out infinite;
+			}
+
+			@keyframes solid-breathe {
+				0% {
+					filter: brightness(1);
+				}
+				25% {
+					filter: brightness(1.3);
+				}
+				50% {
+					filter: brightness(1.1);
+				}
+				75% {
+					filter: brightness(1.2);
+				}
+				100% {
+					filter: brightness(1);
+				}
+			}
+		}
+
+		&.loader_scrim {
+			background: linear-gradient(to top, #3a3e42, #d9d9d9 98%);
+
+			&.animate {
+				background-size: 200% 200%;
+				animation: gradient-breathe 2s ease-in-out infinite;
+			}
+
+			@keyframes gradient-breathe {
+				0% {
+					background-position: 50% 50%;
+				}
+				25% {
+					background-position: 100% 100%;
+				}
+				50% {
+					background-position: 60% 60%;
+				}
+				75% {
+					background-position: 65% 65%;
+				}
+				100% {
+					background-position: 50% 50%;
+				}
+			}
+		}
+	}
+
+	// A scrim gradient is a semi-transparent color layer that fades in or out over an image, often used to enhance readability or create a specific visual style
+	// https://swiftuisnippets.wordpress.com/2024/07/18/adding-a-scrim-gradient-overlay-to-images-with-swift/
+	// https://medium.com/@designwithkabi/ux-drill-03-what-is-a-scrim-0b37dc1e025e
+	// https://www.slrlounge.com/glossary/scrim-definition/
+	.scrim {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.6), #0000 74%);
+	}
+}
+
+// topLeft
+
+.top_left {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 .badge {
-	margin: 24px 0 0 24px;
+	margin: 24px;
 	padding: 4px 16px;
 	background: rgb(26, 25, 25, 0.4);
 	border: 1px solid #fff;
@@ -137,10 +129,18 @@
 	}
 }
 
+// topRight
+
+.top_right {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 .bookmark_icon_wrapper {
 	height: 40px;
 	width: 40px;
-	margin: 12px 12px 0 0;
+	margin: 12px;
 	border-radius: 100vw;
 	background: rgba(0, 0, 0, 0.26); // rgba(0, 0, 0, 0.4) ??
 	display: flex;
@@ -154,6 +154,47 @@
 	}
 }
 
+// bottomLeft
+
+.bottom_left {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.image_caption {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	* {
+		color: #fff;
+	}
+}
+
+// well, not only used in corner of preview block, but also in the main content. so unifying them, cuz mostly the same and merging style definition
+.label_reading_time {
+	@extend .label;
+
+	&.on_background {
+		gap: 10px;
+		padding: 24px;
+		* {
+			color: color.$text-secondary;
+		}
+		img {
+			filter: invert(100%) brightness(1000%) contrast(100%);
+		}
+	}
+}
+
+// bottomRight
+
+.bottom_right {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
 .card_time {
 	padding: 4.5px 12px;
 	display: flex;
@@ -161,31 +202,143 @@
 	gap: 8px;
 	border-top-left-radius: 12px;
 	background: #fff;
+	margin-bottom: -1px; // adjust for browser zooming https://i.imgur.com/z7hHXtT.png
 
-	.timer_icon {
+	img {
+		height: 24px;
+		width: 24px;
 		filter: invert(12%) sepia(66%) saturate(2380%) hue-rotate(347deg) brightness(96%) contrast(96%);
-
-		&,
-		* {
-			height: 24px;
-			width: 24px;
-		}
 	}
 }
 
-.card_main {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	padding: 16px 16px 20px 16px;
-	gap: 8px;
+.button_preview {
+	margin: 24px;
 
-	.card_info_wrapper {
+	* {
+		height: 32px;
+		width: 32px;
+		filter: invert(100%) brightness(1000%) contrast(100%);
+	}
+}
+
+// labels for main content
+
+.label {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+
+	* {
+		line-height: 1;
+	}
+	img {
+		height: 28px;
+		width: 28px;
+		filter: invert(12%) sepia(66%) saturate(2380%) hue-rotate(347deg) brightness(96%) contrast(96%);
+	}
+	.text_filters * {
+		color: color.$text-filters;
+	}
+}
+
+.label_event_range {
+	@extend .label;
+
+	.valid_until_date {
+		display: flex;
+		gap: 8px;
+	}
+}
+.label_location {
+	@extend .label;
+}
+.label_rating {
+	@extend .label;
+
+	> * {
+		display: flex;
+		gap: 6px;
+	}
+	.rating * {
+		font-weight: bold;
+	}
+	.reviews * {
+		color: color.$text-subtitle;
+	}
+	* {
+		font-size: 20px;
+	}
+	img {
+		height: 20px;
+		width: 20px;
+		filter: none;
+	}
+}
+.label_date {
+	@extend .label;
+}
+
+// main content
+
+.card_wide .card_content {
+	gap: 12px;
+	@media (min-width: 1080px) {
+		padding: 20px 24px;
+	}
+}
+.card_content {
+	gap: 8px;
+	padding: 16px 16px 20px 16px;
+
+	&_product,
+	& {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+	}
+
+	// variants
+
+	&_sale {
+		display: flex;
+		flex-direction: column;
+		margin: auto 0;
+
+		gap: 10px;
+	}
+
+	&_company {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+
+		.labels_wrapper {
+			display: flex;
+			flex-direction: row;
+			gap: 24px;
+		}
+	}
+
+	&:has(&_article) {
+		gap: 8px;
+	}
+	&_article * {
+		font-size: 20px;
+	}
+
+	&:has(&_news) {
+		flex-direction: column-reverse;
+		justify-content: start;
+		gap: 16px;
+	}
+	&_news {
+		display: flex;
+		gap: 30px;
+	}
+
+	&_product {
 		gap: 24px;
+		justify-content: space-between;
 
 		.card_details {
 			display: flex;
@@ -202,18 +355,18 @@
 				}
 			}
 		}
-	}
 
-	.card_button {
-		border-radius: 100vw;
-		width: 100%;
-		padding: 12px 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 10px;
+		.card_button {
+			border-radius: 100vw;
+			width: 100%;
+			padding: 12px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
 
-		background: #fafafa;
-		border: 2px solid #efefef;
+			background: #fafafa;
+			border: 2px solid #efefef;
+		}
 	}
 }
