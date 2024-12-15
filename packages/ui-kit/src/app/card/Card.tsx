@@ -5,14 +5,36 @@ import { CardContent, CardTitle, Heading5, Subtitle, TextButton, TextMain, TextO
 import { Aspect, Bookmark, Calendar, Clock, IconStar, Location, Plus, TimerPause } from '@/app/icons';
 import { useDeviceWidths } from '@/hooks/useDeviceWidths';
 import { cn } from '@/util/joinClassNames';
+import nextConfig from '@/../next.config';
 
 import s from './Card.module.scss';
+
+const hostnames = nextConfig.images?.remotePatterns?.map(e => e.hostname) ?? [];
+
+type DimmsType = Record<'preview' | 'card', Partial<Record<'width' | 'height', number>>>;
+const d = {
+	normal: {
+		card: { width: 306 },
+		preview: { height: 180 }
+	},
+	bookmarks: {
+		card: { width: 290 },
+		preview: { height: 180 }
+	},
+	wide: {
+		card: { width: 636 },
+		preview: { height: 298 }
+	}
+} satisfies Record<string, DimmsType>;
+const dimmensions = d as Record<keyof typeof d, DimmsType>;
+for (const t of Object.values(dimmensions)) t.preview.width = t.card.width;
 
 function CardAbstraction({
 	imageUrl,
 	imageScrim = false,
 	imageLoaderAnimate = true,
 	wide = false,
+	bookmarksPage = false, // aka inCollection (page)
 	compact = false,
 	title,
 	content = null,
@@ -23,33 +45,58 @@ function CardAbstraction({
 	bottomLeft = null,
 	bottomRight = null
 }) {
+	if (wide && bookmarksPage) throw new Error('cannot be both wide and in bookmarksPage');
+
 	// this could be done using css, but managing condintions there would be worse idea then allowing passing arbitrary radius value for future here.
 	const borderRadiusBoth = `${roundedValue}px`;
 	const borderRadius = roundedBothSides ? borderRadiusBoth : `${roundedValue}px ${roundedValue}px 0 0`;
-	return (
-		<div className={cn(s.card, wide && s.card_wide)} style={{ borderRadius: borderRadiusBoth }}>
-			<div className={s.card_image_wrapper}>
-				{imageUrl ? (
-					<Image
-						className={s.preview_image}
-						style={{ borderRadius }}
-						src={imageUrl}
-						alt=""
-						width={wide ? 636 : 306}
-						height={wide ? 298 : 180}
-					/>
-				) : (
-					<div className={s.preview_image}>
-						<span
-							className={cn(
-								s.image_skeleton_loader,
-								imageScrim && s.loader_scrim,
-								imageLoaderAnimate && s.animate
-							)}
-							style={{ borderRadius }}
-						/>
-					</div>
+
+	const dimms = wide
+		? //
+		  dimmensions.wide
+		: bookmarksPage
+		? dimmensions.bookmarks
+		: dimmensions.normal;
+
+	const imagePreview =
+		typeof imageUrl == 'string' && imageUrl && !hostnames.some(p => p.hostname == new URL(imageUrl).hostname) ? (
+			<img
+				//
+				src={imageUrl}
+				className={s.preview_image}
+				style={{ borderRadius }}
+			/>
+		) : imageUrl ? (
+			<Image
+				//
+				src={imageUrl}
+				className={s.preview_image}
+				style={{ borderRadius }}
+				alt=""
+				{...dimms.preview}
+			/>
+		) : (
+			<div
+				className={cn(
+					s.preview_image,
+					s.image_skeleton_loader,
+					imageScrim && s.loader_scrim,
+					imageLoaderAnimate && s.animate
 				)}
+				style={{ borderRadius }}
+			/>
+		);
+
+	return (
+		<div
+			className={cn(s.card, wide && s.card_wide, bookmarksPage, s.card_bookmarked)}
+			style={{
+				borderRadius: borderRadiusBoth,
+				...dimms.card
+			}}
+		>
+			<div className={s.card_image_wrapper} style={{ height: dimms.preview.height }}>
+				{imagePreview}
 				{imageUrl && imageScrim && <span className={s.scrim} style={{ borderRadius }} />}
 				{topLeft && <div className={s.top_left}>{topLeft}</div>}
 				{topRight && <div className={s.top_right}>{topRight}</div>}
@@ -207,7 +254,7 @@ export function CardSale({ ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			wide
+			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="Stocks" />}
@@ -226,7 +273,7 @@ export function CardCompany({ ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			wide
+			wide={!p.bookmarksPage}
 			roundedBothSides
 			topLeft={<BadgeType text="Restaurant" />}
 			topRight={<ButtonBookmark />}
@@ -248,7 +295,7 @@ export function CardCompanyEvent({ ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			wide
+			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="Events" />}
@@ -268,7 +315,7 @@ export function CardServiceArticle({ readingTimeMinutes, ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			wide
+			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="Article" />}
@@ -291,7 +338,7 @@ export function CardCompanyNews({ ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			wide
+			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="News" />}
@@ -307,13 +354,23 @@ export function CardCompanyNews({ ...p }) {
 	);
 }
 
-export function Card({
-	price,
-	mass,
-	prepareTime,
+export function CollectionCardSale({ ...p }) {
+	return <CardSale {...p} bookmarksPage />;
+}
+export function CollectionCardCompany({ ...p }) {
+	return <CardCompany {...p} bookmarksPage />;
+}
+export function CollectionCardCompanyEvent({ ...p }) {
+	return <CardCompanyEvent {...p} bookmarksPage />;
+}
+export function CollectionCardServiceArticle({ ...p }) {
+	return <CardServiceArticle {...p} bookmarksPage />;
+}
+export function CollectionCardCompanyNews({ ...p }) {
+	return <CardCompanyNews {...p} bookmarksPage />;
+}
 
-	...p
-}) {
+export function Card({ price, mass, prepareTime, ...p }) {
 	const { hd } = useDeviceWidths();
 
 	return (

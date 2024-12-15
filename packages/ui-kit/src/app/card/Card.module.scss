@@ -6,30 +6,18 @@
 	display: flex;
 	flex-direction: column;
 
-	width: 306px;
-	height: 373px;
-	&.card_wide {
-		width: 636px;
-		height: 450px;
-	}
+	width: fit-content;
+	height: fit-content;
 }
 
 // top part of a card (preview image)
 
-.card_wide {
-	.card_image_wrapper,
-	.preview_image {
-		min-height: 298px !important;
-	}
-}
 .card_image_wrapper {
-	min-height: 180px;
 	position: relative;
 
 	.preview_image {
 		width: 100%;
 		height: 100%;
-		min-height: 180px;
 		object-fit: cover;
 	}
 
@@ -202,7 +190,7 @@
 	gap: 8px;
 	border-top-left-radius: 12px;
 	background: #fff;
-	margin-bottom: -1px; // adjust for browser zooming https://i.imgur.com/z7hHXtT.png
+	margin-bottom: -2px; // adjust for browser zooming https://i.imgur.com/z7hHXtT.png
 
 	img {
 		height: 24px;
@@ -223,6 +211,10 @@
 
 // labels for main content
 
+.card_bookmarked .label img {
+	height: 20px;
+	width: 20px;
+}
 .label {
 	display: flex;
 	gap: 8px;
@@ -232,6 +224,7 @@
 		line-height: 1;
 	}
 	img {
+		align-self: start;
 		height: 28px;
 		width: 28px;
 		filter: invert(12%) sepia(66%) saturate(2380%) hue-rotate(347deg) brightness(96%) contrast(96%);

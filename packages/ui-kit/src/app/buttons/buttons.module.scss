@@ -8,11 +8,12 @@ $radius: 1.5px;
 	border: $radius solid color.$button-bg-contrast;
 	border-radius: 100vw;
 	width: fit-content;
+	transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+
 	padding: 16px + ($radius) 48px;
 	@supports (-moz-appearance: none) {
 		padding: 16px + math.div($radius * 2, 3) 48px;
 	}
-	transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
 
 	* {
 		line-height: 1;
