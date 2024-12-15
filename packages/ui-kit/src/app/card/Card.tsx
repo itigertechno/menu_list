@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { CardContent, CardTitle, Heading5, Subtitle, TextButton, TextMain, TextOfElements } from '@/app/typography';
-import { Aspect, Bookmark, Calendar, Clock, IconStar, Location, Plus, TimerPause } from '@/app/icons';
+import { Aspect, Bookmark, BookmarkActive, Calendar, Clock, IconStar, Location, Plus, TimerPause } from '@/app/icons';
 import { useDeviceWidths } from '@/hooks/useDeviceWidths';
 import { cn } from '@/util/joinClassNames';
 import nextConfig from '@/../next.config';
@@ -19,7 +19,7 @@ const d = {
 	},
 	bookmarks: {
 		card: { width: 290 },
-		preview: { height: 180 }
+		preview: { height: 200 }
 	},
 	wide: {
 		card: { width: 636 },
@@ -89,7 +89,7 @@ function CardAbstraction({
 
 	return (
 		<div
-			className={cn(s.card, wide && s.card_wide, bookmarksPage, s.card_bookmarked)}
+			className={cn(s.card, wide && s.card_wide, bookmarksPage && s.card_bookmarked)}
 			style={{
 				borderRadius: borderRadiusBoth,
 				...dimms.card
@@ -128,10 +128,15 @@ function BadgeType({ text }: { text: string }) {
 
 // topRight
 
-function ButtonBookmark() {
+function ButtonBookmark({ bookmarked }) {
 	return (
 		<span className={s.bookmark_icon_wrapper}>
-			<Bookmark />
+			{bookmarked ? (
+				//
+				<BookmarkActive />
+			) : (
+				<Bookmark />
+			)}
 		</span>
 	);
 }
@@ -253,7 +258,6 @@ function LabelDate({ dateTime = false, date = new Date() }) {
 export function CardSale({ ...p }) {
 	return (
 		<CardAbstraction
-			{...p}
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
@@ -265,6 +269,7 @@ export function CardSale({ ...p }) {
 					<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
 				</div>
 			}
+			{...p}
 		/>
 	);
 }
@@ -272,11 +277,10 @@ export function CardSale({ ...p }) {
 export function CardCompany({ ...p }) {
 	return (
 		<CardAbstraction
-			{...p}
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			topLeft={<BadgeType text="Restaurant" />}
-			topRight={<ButtonBookmark />}
+			topRight={<ButtonBookmark bookmarked={p.bookmarksPage} />}
 			bottomRight={<ButtonPreview />}
 			content={
 				<div className={s.card_content_company}>
@@ -287,6 +291,7 @@ export function CardCompany({ ...p }) {
 					<LabelRatingReviews ratingValue={4.5} reviewCount={34} />
 				</div>
 			}
+			{...p}
 		/>
 	);
 }
@@ -294,12 +299,11 @@ export function CardCompany({ ...p }) {
 export function CardCompanyEvent({ ...p }) {
 	return (
 		<CardAbstraction
-			{...p}
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="Events" />}
-			topRight={<ButtonBookmark />}
+			topRight={<ButtonBookmark bookmarked={p.bookmarksPage} />}
 			bottomLeft={<PreviewCaption caption="The Italian House" subtitle="Restaurant" />}
 			content={
 				<div className={s.card_content_event}>
@@ -307,6 +311,7 @@ export function CardCompanyEvent({ ...p }) {
 					<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
 				</div>
 			}
+			{...p}
 		/>
 	);
 }
@@ -314,12 +319,11 @@ export function CardCompanyEvent({ ...p }) {
 export function CardServiceArticle({ readingTimeMinutes, ...p }) {
 	return (
 		<CardAbstraction
-			{...p}
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="Article" />}
-			topRight={<ButtonBookmark />}
+			topRight={<ButtonBookmark bookmarked={p.bookmarksPage} />}
 			bottomLeft={<LabelTimeReading onBackground readingTimeMinutes={readingTimeMinutes} />}
 			content={
 				<div className={s.card_content_article}>
@@ -330,6 +334,7 @@ export function CardServiceArticle({ readingTimeMinutes, ...p }) {
 					</TextMain>
 				</div>
 			}
+			{...p}
 		/>
 	);
 }
@@ -337,12 +342,11 @@ export function CardServiceArticle({ readingTimeMinutes, ...p }) {
 export function CardCompanyNews({ ...p }) {
 	return (
 		<CardAbstraction
-			{...p}
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
 			topLeft={<BadgeType text="News" />}
-			topRight={<ButtonBookmark />}
+			topRight={<ButtonBookmark bookmarked={p.bookmarksPage} />}
 			bottomLeft={<PreviewCaption caption="The Italian House" subtitle="Restaurant" />}
 			content={
 				<div className={s.card_content_news}>
@@ -350,24 +354,25 @@ export function CardCompanyNews({ ...p }) {
 					<LabelTimeReading readingTimeMinutes={15} />
 				</div>
 			}
+			{...p}
 		/>
 	);
 }
 
 export function CollectionCardSale({ ...p }) {
-	return <CardSale {...p} bookmarksPage />;
+	return <CardSale {...p} bookmarksPage topLeft={null} />;
 }
 export function CollectionCardCompany({ ...p }) {
-	return <CardCompany {...p} bookmarksPage />;
+	return <CardCompany {...p} bookmarksPage bottomRight={null} />;
 }
 export function CollectionCardCompanyEvent({ ...p }) {
-	return <CardCompanyEvent {...p} bookmarksPage />;
+	return <CardCompanyEvent {...p} bookmarksPage topLeft={null} />;
 }
 export function CollectionCardServiceArticle({ ...p }) {
-	return <CardServiceArticle {...p} bookmarksPage />;
+	return <CardServiceArticle {...p} bookmarksPage topLeft={null} />;
 }
 export function CollectionCardCompanyNews({ ...p }) {
-	return <CardCompanyNews {...p} bookmarksPage />;
+	return <CardCompanyNews {...p} bookmarksPage topLeft={null} />;
 }
 
 export function Card({ price, mass, prepareTime, ...p }) {
@@ -376,7 +381,7 @@ export function Card({ price, mass, prepareTime, ...p }) {
 	return (
 		<CardAbstraction
 			{...p}
-			topRight={<ButtonBookmark />}
+			topRight={<ButtonBookmark bookmarked={p.bookmarksPage} />}
 			bottomRight={<BadgeTimePrepare prepareTime={prepareTime} />}
 			content={
 				<div className={s.card_content_product}>

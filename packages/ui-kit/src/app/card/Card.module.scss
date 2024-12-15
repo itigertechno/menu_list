@@ -1,3 +1,18 @@
+@mixin limit($rows) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	@if $rows == 1 {
+		white-space: nowrap;
+	} @else {
+		height: 100%;
+		display: -webkit-box;
+		line-clamp: $rows;
+		-webkit-line-clamp: $rows;
+		-webkit-box-orient: vertical;
+	}
+}
+
 // main wrapper
 
 .card {
@@ -273,12 +288,6 @@
 
 // main content
 
-.card_wide .card_content {
-	gap: 12px;
-	@media (min-width: 1080px) {
-		padding: 20px 24px;
-	}
-}
 .card_content {
 	gap: 8px;
 	padding: 16px 16px 20px 16px;
@@ -294,7 +303,7 @@
 
 	&:has(&_sale) > span:not(&_sale),
 	&:has(&_event) > span:not(&_event) {
-		@extend .limit1;
+		@include limit(1);
 	}
 	&_sale,
 	&_event {
@@ -321,7 +330,7 @@
 		gap: 8px;
 	}
 	&_article * {
-		@extend .limit2;
+		@include limit(2);
 		font-size: 20px;
 	}
 
@@ -331,7 +340,7 @@
 		gap: 16px;
 	}
 	&:has(&_news) > span:not(&_news) {
-		@extend .limit2;
+		@include limit(2);
 	}
 	&_news {
 		display: flex;
@@ -339,7 +348,7 @@
 	}
 
 	&:has(&_product) > span:not(&_product) {
-		@extend .limit2;
+		@include limit(2);
 	}
 	&_product {
 		gap: 24px;
@@ -376,19 +385,37 @@
 	}
 }
 
-.limit {
-	overflow: hidden;
-	text-overflow: ellipsis;
+.card_wide .card_content {
+	gap: 12px;
+	@media (min-width: 1080px) {
+		padding: 20px 24px;
+	}
 }
-.limit1 {
-	@extend .limit;
-	white-space: nowrap;
-}
-.limit2 {
-	@extend .limit;
-	height: 100%;
-	display: -webkit-box;
-	line-clamp: 2;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
+
+.card_bookmarked .card_content {
+	padding: 16px 24px;
+
+	&_company {
+		.labels_wrapper,
+		& {
+			gap: 8px;
+		}
+		.labels_wrapper {
+			flex-direction: column;
+		}
+	}
+
+	&:has(.card_content_article),
+	&:has(.card_content_news) {
+		gap: 8px;
+	}
+
+	&:has(.card_content_news) > span:not(.card_content_news) {
+		@include limit(3);
+	}
+	&:has(.card_content_news) {
+		.label_reading_time {
+			display: none;
+		}
+	}
 }
