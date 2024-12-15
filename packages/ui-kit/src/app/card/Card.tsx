@@ -237,7 +237,7 @@ export function CardCompany({ ...p }) {
 						<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
 						<LabelEventRange range="8 a.m.—10 p.m." />
 					</div>
-					<LabelRatingReviews ratingValue={4.5} reviewCount={1} />
+					<LabelRatingReviews ratingValue={4.5} reviewCount={34} />
 				</div>
 			}
 		/>
@@ -255,10 +255,10 @@ export function CardCompanyEvent({ ...p }) {
 			topRight={<ButtonBookmark />}
 			bottomLeft={<PreviewCaption caption="The Italian House" subtitle="Restaurant" />}
 			content={
-				<>
+				<div className={s.card_content_event}>
 					<LabelDate dateTime date={new Date(2024, 11, 24)} />
 					<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
-				</>
+				</div>
 			}
 		/>
 	);

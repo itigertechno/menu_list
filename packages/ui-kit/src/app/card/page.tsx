@@ -13,7 +13,10 @@ export default function () {
             https://i.imgur.com/UksPOLV.jpeg
             https://i.imgur.com/COZo2Av.jpeg
              */}
-			<CardSale imageUrl="https://i.imgur.com/UksPOLV.jpeg" title="Two dishes for the price of one 1 + 1" />
+			<CardSale
+				imageUrl="https://i.imgur.com/UksPOLV.jpeg"
+				title="Two dishes for the price of one 1 + 1. And too long title actualy"
+			/>
 			<CardCompany imageUrl="https://i.imgur.com/9liApQj.jpeg" title="The Italian House" />
 			<CardCompanyEvent imageUrl="https://i.imgur.com/ug5BVVt.jpeg" title="Pizza cooking Master class" />
 			<CardServiceArticle
