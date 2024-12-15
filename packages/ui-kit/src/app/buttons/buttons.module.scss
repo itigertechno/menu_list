@@ -12,6 +12,7 @@ $radius: 1.5px;
 	@supports (-moz-appearance: none) {
 		padding: 16px + math.div($radius * 2, 3) 48px;
 	}
+	transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
 
 	* {
 		line-height: 1;
@@ -20,7 +21,6 @@ $radius: 1.5px;
 
 	&:hover,
 	&:active {
-		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
 		background: color.$button-bg;
 		* {
 			color: color.$button-bg-contrast;
@@ -28,6 +28,7 @@ $radius: 1.5px;
 	}
 
 	&:disabled {
+		cursor: not-allowed;
 		background: color.$button-bg-disabled;
 		* {
 			color: color.$text-filters;
