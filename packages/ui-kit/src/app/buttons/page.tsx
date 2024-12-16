@@ -53,10 +53,10 @@ export default function () {
 				Demo Button
 			</Button>
 
-			<ButtonAccent>Demo ButtonAccent</ButtonAccent>
-			<ButtonAccent ref={refa1}>Demo ButtonAccent</ButtonAccent>
+			<ButtonAccent>Demo Accent</ButtonAccent>
+			<ButtonAccent ref={refa1}>Demo Accent</ButtonAccent>
 			<ButtonAccent ref={refa2} disabled>
-				Demo ButtonAccent
+				Demo Accent
 			</ButtonAccent>
 		</div>
 	);
