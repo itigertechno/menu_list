@@ -37,3 +37,40 @@ $radius: 1.5px;
 		}
 	}
 }
+
+.button_accent {
+	outline: none;
+	background: color.$button-bg-contrast;
+	border: $radius solid color.$accent;
+	border-radius: 100vw;
+	width: fit-content;
+	transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+
+	padding: 16px + ($radius) 48px;
+	@supports (-moz-appearance: none) {
+		padding: 16px + math.div($radius * 2, 3) 48px;
+	}
+
+	* {
+		line-height: 1;
+		color: color.$accent;
+	}
+
+	&:hover,
+	&:active {
+		cursor: pointer;
+		background: color.$accent;
+		* {
+			color: color.$button-bg-contrast;
+		}
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		background: color.$button-bg-disabled;
+		border: $radius solid color.$button-bg-contrast;
+		* {
+			color: color.$text-filters;
+		}
+	}
+}

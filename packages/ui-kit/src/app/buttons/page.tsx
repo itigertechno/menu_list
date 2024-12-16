@@ -1,11 +1,12 @@
 'use client';
 
-import { Button } from '@/app/buttons';
+import { Button, ButtonAccent } from '@/app/buttons';
 import s from './button-demo.module.scss';
 import { useEffect, useRef, useState } from 'react';
 
 export default function () {
 	const ref = useRef<HTMLButtonElement>(null);
+	const refa1 = useRef<HTMLButtonElement>(null);
 
 	const [duration, setDuration] = useState(0);
 	useEffect(() => {
@@ -20,9 +21,20 @@ export default function () {
 		holdDuration: duration + 400,
 		intervalDuration: duration + 1000
 	});
+	useActionCycle(refa1, {
+		action: el => el.classList.add('hover'),
+		revert: el => el.classList.remove('hover'),
+		holdDuration: duration + 400,
+		intervalDuration: duration + 1000
+	});
 
 	const refd = useRef<HTMLButtonElement>(null);
 	useActionCycle(refd, {
+		action: el => (el.disabled = !el.disabled),
+		revert: el => (el.disabled = !el.disabled)
+	});
+	const refa2 = useRef<HTMLButtonElement>(null);
+	useActionCycle(refa2, {
 		action: el => (el.disabled = !el.disabled),
 		revert: el => (el.disabled = !el.disabled)
 	});
@@ -37,11 +49,15 @@ export default function () {
 			<Button ref={ref} onClick={() => {}}>
 				Demo Button
 			</Button>
-			<Button ref={refd}>Demo Button</Button>
+			<Button ref={refd} disabled>
+				Demo Button
+			</Button>
 
-			<Button disabled>Demo Button</Button>
-			<Button disabled>Demo Button</Button>
-			<Button disabled>Demo Button</Button>
+			<ButtonAccent>Demo ButtonAccent</ButtonAccent>
+			<ButtonAccent ref={refa1}>Demo ButtonAccent</ButtonAccent>
+			<ButtonAccent ref={refa2} disabled>
+				Demo ButtonAccent
+			</ButtonAccent>
 		</div>
 	);
 }
