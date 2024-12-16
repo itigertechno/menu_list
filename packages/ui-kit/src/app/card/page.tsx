@@ -19,6 +19,8 @@ export default function () {
 			<CardSale
 				imageUrl="https://i.imgur.com/UksPOLV.jpeg"
 				title="Two dishes for the price of one 1 + 1. And too long title actualy"
+				caption="The Italian House"
+				subtitle="Restaurant"
 			/>
 			<CardCompany
 				imageUrl="https://i.imgur.com/9liApQj.jpeg"
@@ -44,6 +46,12 @@ export default function () {
 			<CollectionCardSale
 				imageUrl="https://i.imgur.com/x4tELcS.jpeg"
 				title="Two dishes for the price of one 1 + 1. And too long title actualy"
+				caption="The Italian House"
+				subtitle="Restaurant"
+				description="Scrambled eggs with bacon, avocado, cherry tomatoes yes yes yes yes yes yes yes yes yes"
+				price={50.99}
+				mass={380}
+				prepareTime={15}
 			/>
 			<CollectionCardCompany
 				imageUrl="https://i.imgur.com/9liApQj.jpeg"

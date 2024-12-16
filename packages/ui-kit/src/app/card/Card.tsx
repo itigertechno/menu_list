@@ -37,6 +37,7 @@ function CardAbstraction({
 	bookmarksPage = false, // aka inCollection (page)
 	compact = false,
 	title,
+	subtitle,
 	content = null,
 	roundedValue = 16,
 	roundedBothSides = false,
@@ -87,6 +88,21 @@ function CardAbstraction({
 			/>
 		);
 
+	const titleCard = (
+		<span className={s.title_wrapper}>
+			{wide ? (
+				<Heading5>{title}</Heading5>
+			) : (
+				<>
+					<span className={s.title_subtile}>
+						<Subtitle>{subtitle}</Subtitle>
+					</span>
+					<CardTitle>{title}</CardTitle>
+				</>
+			)}
+		</span>
+	);
+
 	return (
 		<div
 			className={cn(s.card, wide && s.card_wide, bookmarksPage && s.card_bookmarked)}
@@ -104,12 +120,7 @@ function CardAbstraction({
 				{bottomRight && <div className={s.bottom_right}>{bottomRight}</div>}
 			</div>
 			<div className={s.card_content}>
-				{wide ? (
-					//
-					<Heading5>{title}</Heading5>
-				) : (
-					<CardTitle>{title}</CardTitle>
-				)}
+				{titleCard}
 				{content}
 			</div>
 		</div>
@@ -255,14 +266,15 @@ function LabelDate({ dateTime = false, date = new Date() }) {
 
 // variants
 
-export function CardSale({ ...p }) {
+export function CardSale({ caption, subtitle, ...p }) {
 	return (
 		<CardAbstraction
 			wide={!p.bookmarksPage}
 			roundedBothSides
 			imageScrim
+			subtitle={subtitle}
 			topLeft={<BadgeType text="Stocks" />}
-			bottomLeft={<PreviewCaption caption="The Italian House" subtitle="Restaurant" />}
+			bottomLeft={<PreviewCaption caption={caption} subtitle={subtitle} />}
 			content={
 				<div className={s.card_content_sale}>
 					<LabelEventRange limited range="8 a.m.—10 a.m., Every Tuesday" />
@@ -359,8 +371,40 @@ export function CardCompanyNews({ ...p }) {
 	);
 }
 
-export function CollectionCardSale({ ...p }) {
-	return <CardSale {...p} bookmarksPage topLeft={null} />;
+export function CollectionCardSale({ caption, title, subtitle, description, price, mass, prepareTime, ...p }) {
+	return (
+		<CardSale
+			{...p}
+			bookmarksPage
+			title={caption}
+			subtitle={subtitle}
+			topLeft={null}
+			topRight={<ButtonBookmark bookmarked={true} />}
+			bottomLeft={null}
+			bottomRight={<BadgeTimePrepare prepareTime={prepareTime} />}
+			content={
+				<div className={s.card_content_product_wrapper}>
+					<div className={s.card_description}>
+						<CardContent>{description}</CardContent>
+					</div>
+					<div className={s.card_content_product}>
+						<div className={s.card_details}>
+							<TextOfElements>
+								<span className={s.dollar_sign}>$</span> {price}
+							</TextOfElements>
+							<div className={s.card_mass}>
+								<CardContent>{mass} g.</CardContent>
+							</div>
+						</div>
+						<button className={s.card_button}>
+							<Plus />
+							<TextButton>Choose</TextButton>
+						</button>
+					</div>
+				</div>
+			}
+		/>
+	);
 }
 export function CollectionCardCompany({ ...p }) {
 	return <CardCompany {...p} bookmarksPage bottomRight={null} />;

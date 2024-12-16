@@ -34,6 +34,9 @@
 
 // top part of a card (preview image)
 
+.card:has(.card_content_product) .card_image_wrapper {
+	max-height: 180px;
+}
 .card_image_wrapper {
 	position: relative;
 
@@ -128,6 +131,9 @@
 	left: 0;
 }
 
+.card_bookmarked .badge {
+	margin: 16px;
+}
 .badge {
 	margin: 24px;
 	padding: 4px 16px;
@@ -147,6 +153,14 @@
 	right: 0;
 }
 
+.card_wide .bookmark_icon_wrapper {
+	height: 48px;
+	width: 48px;
+	margin: 16px;
+}
+.card_bookmarked .bookmark_icon_wrapper {
+	margin: 16px 20px;
+}
 .bookmark_icon_wrapper {
 	height: 40px;
 	width: 40px;
@@ -305,8 +319,15 @@
 // main content
 
 .card_content {
-	gap: 8px;
 	padding: 16px 16px 20px 16px;
+
+	.title_wrapper {
+		display: flex;
+		flex-direction: column;
+		.title_subtitle * {
+			font-size: 16px;
+		}
+	}
 
 	&_product,
 	& {
@@ -317,24 +338,43 @@
 
 	// variants
 
-	&:has(&_sale) > span:not(&_sale),
-	&:has(&_company) > span:not(&_company),
-	&:has(&_event) > span:not(&_event),
-	&:has(&_article) > span:not(&_article) {
+	&:has(&_sale) .title_wrapper *,
+	&:has(&_company) .title_wrapper *,
+	&:has(&_event) .title_wrapper *,
+	&:has(&_article) .title_wrapper * {
 		@include limit(1);
 	}
-	&:has(&_news) > span:not(&_news),
-	&:has(&_product) > span:not(&_product) {
+	&:has(&_news) .title_wrapper *,
+	&:has(&_product) .title_wrapper * {
 		@include limit(2);
 	}
 
-	&:has(&_article) {
+	&:has(&_sale),
+	&:has(&_company),
+	&:has(&_event) {
+		gap: 12px;
+	}
+	&:has(&_article),
+	&:has(&_product) {
 		gap: 8px;
 	}
+	&:has(&_product) &_product_wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+
+		.card_content_product {
+			gap: 20px;
+		}
+
+		.card_description * {
+			@include limit(2);
+		}
+	}
 	&:has(&_news) {
+		gap: 16px;
 		flex-direction: column-reverse;
 		justify-content: start;
-		gap: 16px;
 	}
 
 	&_sale,
@@ -400,7 +440,6 @@
 }
 
 .card_wide .card_content {
-	gap: 12px;
 	@media (min-width: 1080px) {
 		padding: 20px 24px;
 	}
@@ -419,15 +458,19 @@
 		}
 	}
 
-	&:has(.card_content_article),
+	&_product .card_button {
+		box-shadow: 20px 26px 32px 0px rgba(70, 70, 70, 0.1);
+	}
+
+	&:has(.card_content_sale) &:has(.card_content_article),
 	&:has(.card_content_news) {
 		gap: 8px;
 	}
 
-	&:has(.card_content_article) > span:not(.card_content_article) {
+	&:has(.card_content_article) .title_wrapper * {
 		@include limit(2);
 	}
-	&:has(.card_content_news) > span:not(.card_content_news) {
+	&:has(.card_content_news) .title_wrapper * {
 		@include limit(3);
 	}
 	&:has(.card_content_news) {
