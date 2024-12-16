@@ -22,7 +22,7 @@ const d = {
 		preview: { height: 200 }
 	},
 	wide: {
-		card: { width: 636 },
+		card: { width: 636, height: 450 },
 		preview: { height: 298 }
 	}
 } satisfies Record<string, DimmsType>;
@@ -285,7 +285,7 @@ export function CardCompany({ ...p }) {
 			content={
 				<div className={s.card_content_company}>
 					<div className={s.labels_wrapper}>
-						<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
+						<LabelLocation address="Bybrook Developments (Southern) Ltd, Bowman House Business Centre, Bowman House, Whitehill Industrial Estate, Whitehill Lane, Royal Wootton Bassett" />
 						<LabelEventRange range="8 a.m.—10 p.m." />
 					</div>
 					<LabelRatingReviews ratingValue={4.5} reviewCount={34} />
@@ -308,7 +308,7 @@ export function CardCompanyEvent({ ...p }) {
 			content={
 				<div className={s.card_content_event}>
 					<LabelDate dateTime date={new Date(2024, 11, 24)} />
-					<LabelLocation address="Area 12 Ottobre 1492, 12, Rome" />
+					<LabelLocation address="Bybrook Developments (Southern) Ltd, Bowman House Business Centre, Bowman House, Whitehill Industrial Estate, Whitehill Lane, Royal Wootton Bassett" />
 				</div>
 			}
 			{...p}

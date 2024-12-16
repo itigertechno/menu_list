@@ -1,3 +1,9 @@
+@mixin limit-width($width) {
+	text-overflow: ellipsis;
+	width: calc($width);
+	white-space: unset;
+}
+
 @mixin limit($rows) {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -5,6 +11,7 @@
 	@if $rows == 1 {
 		white-space: nowrap;
 	} @else {
+		white-space: unset;
 		height: 100%;
 		display: -webkit-box;
 		line-clamp: $rows;
@@ -257,8 +264,17 @@
 		gap: 8px;
 	}
 }
+.card_wide .card_content_company .label_location {
+	width: 60%;
+	span {
+		@include limit(1);
+	}
+}
 .label_location {
 	@extend .label;
+	span {
+		@include limit(1);
+	}
 }
 .label_rating {
 	@extend .label;
@@ -302,9 +318,25 @@
 	// variants
 
 	&:has(&_sale) > span:not(&_sale),
-	&:has(&_event) > span:not(&_event) {
+	&:has(&_company) > span:not(&_company),
+	&:has(&_event) > span:not(&_event),
+	&:has(&_article) > span:not(&_article) {
 		@include limit(1);
 	}
+	&:has(&_news) > span:not(&_news),
+	&:has(&_product) > span:not(&_product) {
+		@include limit(2);
+	}
+
+	&:has(&_article) {
+		gap: 8px;
+	}
+	&:has(&_news) {
+		flex-direction: column-reverse;
+		justify-content: start;
+		gap: 16px;
+	}
+
 	&_sale,
 	&_event {
 		display: flex;
@@ -313,7 +345,6 @@
 
 		gap: 10px;
 	}
-
 	&_company {
 		display: flex;
 		flex-direction: column;
@@ -325,30 +356,13 @@
 			gap: 24px;
 		}
 	}
-
-	&:has(&_article) {
-		gap: 8px;
-	}
 	&_article * {
 		@include limit(2);
 		font-size: 20px;
 	}
-
-	&:has(&_news) {
-		flex-direction: column-reverse;
-		justify-content: start;
-		gap: 16px;
-	}
-	&:has(&_news) > span:not(&_news) {
-		@include limit(2);
-	}
 	&_news {
 		display: flex;
 		gap: 30px;
-	}
-
-	&:has(&_product) > span:not(&_product) {
-		@include limit(2);
 	}
 	&_product {
 		gap: 24px;
@@ -410,6 +424,9 @@
 		gap: 8px;
 	}
 
+	&:has(.card_content_article) > span:not(.card_content_article) {
+		@include limit(2);
+	}
 	&:has(.card_content_news) > span:not(.card_content_news) {
 		@include limit(3);
 	}

@@ -20,11 +20,17 @@ export default function () {
 				imageUrl="https://i.imgur.com/UksPOLV.jpeg"
 				title="Two dishes for the price of one 1 + 1. And too long title actualy"
 			/>
-			<CardCompany imageUrl="https://i.imgur.com/9liApQj.jpeg" title="The Italian House" />
-			<CardCompanyEvent imageUrl="https://i.imgur.com/ug5BVVt.jpeg" title="Pizza cooking Master class" />
+			<CardCompany
+				imageUrl="https://i.imgur.com/9liApQj.jpeg"
+				title="The Italian House. And too long contiuous title actualy"
+			/>
+			<CardCompanyEvent
+				imageUrl="https://i.imgur.com/ug5BVVt.jpeg"
+				title="Pizza cooking Master class. And too long contiuous title actualy"
+			/>
 			<CardServiceArticle
 				imageUrl="https://i.imgur.com/bct6UPT.jpeg"
-				title="Top 5 most popular places in Rome"
+				title="Top 5 most popular places in Rome. And too long contiuous title actualy"
 				readingTimeMinutes={15}
 			/>
 			<CardCompanyNews
@@ -39,14 +45,17 @@ export default function () {
 				imageUrl="https://i.imgur.com/x4tELcS.jpeg"
 				title="Two dishes for the price of one 1 + 1. And too long title actualy"
 			/>
-			<CollectionCardCompany imageUrl="https://i.imgur.com/9liApQj.jpeg" title="The Italian House" />
+			<CollectionCardCompany
+				imageUrl="https://i.imgur.com/9liApQj.jpeg"
+				title="The Italian House. And too long contiuous title actualy"
+			/>
 			<CollectionCardCompanyEvent
 				imageUrl="https://i.imgur.com/ug5BVVt.jpeg"
-				title="Pizza cooking Master class"
+				title="Pizza cooking Master class. And too long contiuous title actualy"
 			/>
 			<CollectionCardServiceArticle
 				imageUrl="https://i.imgur.com/bct6UPT.jpeg"
-				title="Top 5 most popular places in Rome"
+				title="Top 5 most popular places in Rome. And too long contiuous title actualy"
 				readingTimeMinutes={15}
 			/>
 			<CollectionCardCompanyNews
