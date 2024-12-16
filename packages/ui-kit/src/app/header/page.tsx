@@ -1,9 +1,9 @@
-import { Footer } from '.';
+import { Header } from '.';
 
 export default function () {
 	return (
 		<>
-			<Footer />
+			<Header />
 		</>
 	);
 }
